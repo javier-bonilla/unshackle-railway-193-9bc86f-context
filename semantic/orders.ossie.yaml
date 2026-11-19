@@ -37,12 +37,17 @@ datasets:
       dialects:
       - dialect: ANSI_SQL
         expression: customer_id
+  - name: product_id
+    expression:
+      dialects:
+      - dialect: ANSI_SQL
+        expression: product_id
   - name: recognized_revenue_value
     expression:
       dialects:
       - dialect: ANSI_SQL
-        expression: CASE WHEN status = 'paid' THEN amount ELSE 0 END
-    description: Revenue in USD from paid orders, excluding refunds and cancellations.
+        expression: CASE WHEN status = 'completed' THEN net_usd ELSE 0 END
+    description: Scenario recognized revenue USD; excludes returned and cancelled.
   metrics:
   - name: recognized_revenue
     expression:

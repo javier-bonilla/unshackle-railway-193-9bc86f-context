@@ -1,11 +1,11 @@
 {
-  "tool": "sql",
-  "written": [
-    "notebooks/python-monthly-py-cd98ddc19804.ipynb",
-    "notebooks/sql-regions-sql-8613b8029aff.ipynb",
-    "notebooks/sql-revenue-sql-3ea4e59b08ab.ipynb"
+  "tool": "dbt",
+  "written": [],
+  "unchanged": [
+    "semantic/orders.ossie.yaml",
+    "catalog/warehouse/main/orders.yml",
+    "queries/dbt-orders.sql"
   ],
-  "unchanged": [],
   "kept_hand_edits": [],
   "renamed": {},
   "removed": [],

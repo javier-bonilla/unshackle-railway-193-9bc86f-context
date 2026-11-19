@@ -1,6 +1,25 @@
 {
   "retained_paths": [],
   "tables": {
+    "catalog/warehouse/public/branches.yml": {
+      "columns": [
+        {
+          "name": "branch_id",
+          "nullable": false,
+          "type": "INTEGER"
+        },
+        {
+          "name": "branch_name",
+          "nullable": true,
+          "type": "TEXT"
+        }
+      ],
+      "name": "branches",
+      "primary_key": [
+        "branch_id"
+      ],
+      "source": "warehouse:public.branches"
+    },
     "catalog/warehouse/public/customers.yml": {
       "columns": [
         {
@@ -10,14 +29,25 @@
         },
         {
           "name": "customer_name",
-          "nullable": false,
+          "nullable": true,
           "type": "TEXT"
         },
         {
-          "description": "Customer sales region, not order destination.",
-          "name": "region",
-          "nullable": false,
-          "type": "TEXT"
+          "name": "employee_id",
+          "nullable": true,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "employee_id"
+          ],
+          "referred_columns": [
+            "employee_id"
+          ],
+          "referred_schema": "public",
+          "referred_table": "employees"
         }
       ],
       "name": "customers",
@@ -26,18 +56,298 @@
       ],
       "source": "warehouse:public.customers"
     },
+    "catalog/warehouse/public/employees.yml": {
+      "columns": [
+        {
+          "name": "branch_id",
+          "nullable": true,
+          "type": "INTEGER"
+        },
+        {
+          "name": "employee_id",
+          "nullable": false,
+          "type": "INTEGER"
+        },
+        {
+          "name": "employee_name",
+          "nullable": true,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "branch_id"
+          ],
+          "referred_columns": [
+            "branch_id"
+          ],
+          "referred_schema": "public",
+          "referred_table": "branches"
+        }
+      ],
+      "name": "employees",
+      "primary_key": [
+        "employee_id"
+      ],
+      "source": "warehouse:public.employees"
+    },
+    "catalog/warehouse/public/history_accounts.yml": {
+      "columns": [
+        {
+          "name": "account_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "account_manager",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "account_name",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "business_size",
+          "nullable": true,
+          "type": "INTEGER"
+        },
+        {
+          "name": "payment_cycle",
+          "nullable": true,
+          "type": "VARCHAR"
+        }
+      ],
+      "name": "history_accounts",
+      "source": "warehouse:public.history_accounts"
+    },
+    "catalog/warehouse/public/history_orders.yml": {
+      "columns": [
+        {
+          "name": "account_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "cancelled_at",
+          "nullable": true,
+          "type": "DATE"
+        },
+        {
+          "name": "days_to_close",
+          "nullable": true,
+          "type": "INTEGER"
+        },
+        {
+          "name": "discount_percentage",
+          "nullable": true,
+          "type": "NUMERIC(4, 2)"
+        },
+        {
+          "name": "order_contact_email",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "order_contact_name",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "order_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "post_discount_revenue",
+          "nullable": true,
+          "type": "NUMERIC(9, 2)"
+        },
+        {
+          "name": "pre_discount_revenue",
+          "nullable": true,
+          "type": "NUMERIC(9, 2)"
+        },
+        {
+          "name": "product_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "purchased_at",
+          "nullable": true,
+          "type": "DATE"
+        },
+        {
+          "name": "quantity",
+          "nullable": true,
+          "type": "INTEGER"
+        },
+        {
+          "name": "returned_at",
+          "nullable": true,
+          "type": "DATE"
+        },
+        {
+          "name": "shipping_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "status",
+          "nullable": true,
+          "type": "VARCHAR"
+        }
+      ],
+      "name": "history_orders",
+      "source": "warehouse:public.history_orders"
+    },
+    "catalog/warehouse/public/history_products.yml": {
+      "columns": [
+        {
+          "name": "paper_type",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "price",
+          "nullable": true,
+          "type": "NUMERIC(6, 2)"
+        },
+        {
+          "name": "product_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "product_name",
+          "nullable": true,
+          "type": "VARCHAR"
+        }
+      ],
+      "name": "history_products",
+      "source": "warehouse:public.history_products"
+    },
+    "catalog/warehouse/public/history_reviews.yml": {
+      "columns": [
+        {
+          "name": "order_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "rating",
+          "nullable": true,
+          "type": "INTEGER"
+        },
+        {
+          "name": "review",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "review_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "reviewed_at",
+          "nullable": true,
+          "type": "TIMESTAMP"
+        }
+      ],
+      "name": "history_reviews",
+      "source": "warehouse:public.history_reviews"
+    },
+    "catalog/warehouse/public/history_shippings.yml": {
+      "columns": [
+        {
+          "name": "days_to_ship",
+          "nullable": true,
+          "type": "DOUBLE PRECISION"
+        },
+        {
+          "name": "shipping_address",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "shipping_city",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "shipping_cost",
+          "nullable": true,
+          "type": "NUMERIC(5, 2)"
+        },
+        {
+          "name": "shipping_id",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "shipping_latitude",
+          "nullable": true,
+          "type": "NUMERIC(8, 6)"
+        },
+        {
+          "name": "shipping_longitude",
+          "nullable": true,
+          "type": "NUMERIC(9, 6)"
+        },
+        {
+          "name": "shipping_mode",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "shipping_region",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "shipping_state",
+          "nullable": true,
+          "type": "VARCHAR"
+        },
+        {
+          "name": "shipping_zip",
+          "nullable": true,
+          "type": "VARCHAR"
+        }
+      ],
+      "name": "history_shippings",
+      "source": "warehouse:public.history_shippings"
+    },
     "catalog/warehouse/public/orders.yml": {
       "columns": [
         {
-          "description": "Order amount in USD; include only paid orders when calculating recognized revenue.",
-          "name": "amount",
-          "nullable": false,
+          "name": "cost_usd",
+          "nullable": true,
           "type": "NUMERIC(12, 2)"
         },
         {
           "name": "customer_id",
-          "nullable": false,
+          "nullable": true,
           "type": "INTEGER"
+        },
+        {
+          "name": "discount_usd",
+          "nullable": true,
+          "type": "NUMERIC(12, 2)"
+        },
+        {
+          "name": "gross_usd",
+          "nullable": true,
+          "type": "NUMERIC(12, 2)"
+        },
+        {
+          "name": "net_usd",
+          "nullable": true,
+          "type": "NUMERIC(12, 2)"
         },
         {
           "name": "order_id",
@@ -46,16 +356,25 @@
         },
         {
           "name": "ordered_at",
-          "nullable": false,
+          "nullable": true,
           "type": "DATE"
         },
         {
+          "name": "product_id",
+          "nullable": true,
+          "type": "TEXT"
+        },
+        {
+          "name": "quantity",
+          "nullable": true,
+          "type": "INTEGER"
+        },
+        {
           "name": "status",
-          "nullable": false,
+          "nullable": true,
           "type": "TEXT"
         }
       ],
-      "description": "One row per order. Recognized revenue includes only status = paid; refunded and cancelled orders are excluded.",
       "foreign_keys": [
         {
           "columns": [
@@ -66,6 +385,16 @@
           ],
           "referred_schema": "public",
           "referred_table": "customers"
+        },
+        {
+          "columns": [
+            "product_id"
+          ],
+          "referred_columns": [
+            "product_id"
+          ],
+          "referred_schema": "public",
+          "referred_table": "products"
         }
       ],
       "name": "orders",
@@ -73,6 +402,35 @@
         "order_id"
       ],
       "source": "warehouse:public.orders"
+    },
+    "catalog/warehouse/public/products.yml": {
+      "columns": [
+        {
+          "name": "product_id",
+          "nullable": false,
+          "type": "TEXT"
+        },
+        {
+          "name": "product_name",
+          "nullable": true,
+          "type": "TEXT"
+        },
+        {
+          "name": "unit_cost",
+          "nullable": true,
+          "type": "NUMERIC(12, 2)"
+        },
+        {
+          "name": "unit_price",
+          "nullable": true,
+          "type": "NUMERIC(12, 2)"
+        }
+      ],
+      "name": "products",
+      "primary_key": [
+        "product_id"
+      ],
+      "source": "warehouse:public.products"
     }
   },
   "version": 1

@@ -1,0 +1,11 @@
+name: branches
+primary_key:
+- branch_id
+source: warehouse:public.branches
+columns:
+- name: branch_id
+  nullable: false
+  type: INTEGER
+- name: branch_name
+  nullable: true
+  type: TEXT

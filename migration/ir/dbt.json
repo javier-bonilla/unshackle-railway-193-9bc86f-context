@@ -6,85 +6,9 @@
     {
       "datasource": "warehouse",
       "schema": "",
-      "name": "customers",
-      "description": "One row per customer, including their sales region.",
-      "columns": [
-        {
-          "name": "customer_id",
-          "type": "",
-          "description": "Unique customer identifier.",
-          "label": "",
-          "hidden": false,
-          "nullable": null
-        },
-        {
-          "name": "customer_name",
-          "type": "",
-          "description": "Fictional customer name.",
-          "label": "",
-          "hidden": false,
-          "nullable": null
-        },
-        {
-          "name": "region",
-          "type": "",
-          "description": "Customer sales region.",
-          "label": "",
-          "hidden": false,
-          "nullable": null
-        }
-      ],
-      "source_ref": "dbt:models/customers.sql",
-      "primary_key": [],
-      "foreign_keys": []
-    },
-    {
-      "datasource": "warehouse",
-      "schema": "",
       "name": "orders",
-      "description": "One row per order. Recognized revenue counts paid orders only; refunded and cancelled orders are excluded.",
-      "columns": [
-        {
-          "name": "amount",
-          "type": "",
-          "description": "USD amount before filtering for paid status.",
-          "label": "",
-          "hidden": false,
-          "nullable": null
-        },
-        {
-          "name": "customer_id",
-          "type": "",
-          "description": "Customer foreign key.",
-          "label": "",
-          "hidden": false,
-          "nullable": null
-        },
-        {
-          "name": "order_id",
-          "type": "",
-          "description": "Unique order identifier.",
-          "label": "",
-          "hidden": false,
-          "nullable": null
-        },
-        {
-          "name": "ordered_at",
-          "type": "",
-          "description": "Order date; calendar months are used for monthly reporting.",
-          "label": "",
-          "hidden": false,
-          "nullable": null
-        },
-        {
-          "name": "status",
-          "type": "",
-          "description": "paid, refunded, or cancelled. Only paid contributes to recognized revenue.",
-          "label": "",
-          "hidden": false,
-          "nullable": null
-        }
-      ],
+      "description": "2025 scenario orders; only completed counts as recognized revenue. See knowledge/team-demo.md for relationships.",
+      "columns": [],
       "source_ref": "dbt:models/orders.sql",
       "primary_key": [],
       "foreign_keys": []
@@ -107,6 +31,13 @@
           "name": "customer",
           "type": "foreign",
           "expr": "customer_id",
+          "join_type": "",
+          "extensions": {}
+        },
+        {
+          "name": "product",
+          "type": "foreign",
+          "expr": "product_id",
           "join_type": "",
           "extensions": {}
         }
@@ -145,11 +76,11 @@
         {
           "name": "recognized_revenue",
           "agg": "sum",
-          "expr": "CASE WHEN status = 'paid' THEN amount ELSE 0 END",
-          "description": "Revenue in USD from paid orders, excluding refunds and cancellations.",
+          "expr": "CASE WHEN status = 'completed' THEN net_usd ELSE 0 END",
+          "description": "Scenario recognized revenue USD; excludes returned and cancelled.",
           "label": "",
           "agg_params": {},
-          "source_expression": "agg: sum\ncreate_metric: true\ndescription: Revenue in USD from paid orders, excluding refunds and cancellations.\nexpr: CASE WHEN status = 'paid' THEN amount ELSE 0 END\nname: recognized_revenue",
+          "source_expression": "agg: sum\ncreate_metric: true\ndescription: Scenario recognized revenue USD; excludes returned and cancelled.\nexpr: CASE WHEN status = 'completed' THEN net_usd ELSE 0 END\nname: recognized_revenue",
           "source_language": "MetricFlow",
           "todo": "",
           "format": "",
@@ -180,7 +111,7 @@
       "grain_to_date": "",
       "fill_nulls_with": null,
       "semantic_model": "orders",
-      "source_expression": "agg: sum\ncreate_metric: true\ndescription: Revenue in USD from paid orders, excluding refunds and cancellations.\nexpr: CASE WHEN status = 'paid' THEN amount ELSE 0 END\nname: recognized_revenue",
+      "source_expression": "agg: sum\ncreate_metric: true\ndescription: Scenario recognized revenue USD; excludes returned and cancelled.\nexpr: CASE WHEN status = 'completed' THEN net_usd ELSE 0 END\nname: recognized_revenue",
       "source_language": "MetricFlow",
       "source_ref": "",
       "todo": "",
@@ -192,20 +123,8 @@
   "schedules": [],
   "queries": [
     {
-      "name": "dbt customers",
-      "sql": "SELECT customer_id, customer_name, region FROM public.customers\n",
-      "description": "Reference model SQL; importing does not execute or verify it.",
-      "language": "sql",
-      "datasource": "warehouse",
-      "aliases": [],
-      "owner": "",
-      "metric": false,
-      "source_ref": "dbt:models/customers.sql",
-      "todo": ""
-    },
-    {
       "name": "dbt orders",
-      "sql": "SELECT order_id, customer_id, ordered_at, amount, status FROM public.orders\n",
+      "sql": "select * from orders\n",
       "description": "Reference model SQL; importing does not execute or verify it.",
       "language": "sql",
       "datasource": "warehouse",

@@ -1,3 +1,10 @@
+foreign_keys:
+- columns:
+  - employee_id
+  referred_schema: public
+  referred_table: employees
+  referred_columns:
+  - employee_id
 name: customers
 primary_key:
 - customer_id
@@ -7,9 +14,8 @@ columns:
   nullable: false
   type: INTEGER
 - name: customer_name
-  nullable: false
+  nullable: true
   type: TEXT
-- description: Customer sales region, not order destination.
-  name: region
-  nullable: false
-  type: TEXT
+- name: employee_id
+  nullable: true
+  type: INTEGER

@@ -6,6 +6,35 @@
     {
       "datasource": "warehouse",
       "schema": "public",
+      "name": "branches",
+      "description": "",
+      "columns": [
+        {
+          "name": "branch_id",
+          "type": "INTEGER",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": false
+        },
+        {
+          "name": "branch_name",
+          "type": "TEXT",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        }
+      ],
+      "source_ref": "warehouse:public.branches",
+      "primary_key": [
+        "branch_id"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "datasource": "warehouse",
+      "schema": "public",
       "name": "customers",
       "description": "",
       "columns": [
@@ -23,36 +52,470 @@
           "description": "",
           "label": "",
           "hidden": false,
-          "nullable": false
+          "nullable": true
         },
         {
-          "name": "region",
-          "type": "TEXT",
-          "description": "Customer sales region, not order destination.",
+          "name": "employee_id",
+          "type": "INTEGER",
+          "description": "",
           "label": "",
           "hidden": false,
-          "nullable": false
+          "nullable": true
         }
       ],
       "source_ref": "warehouse:public.customers",
       "primary_key": [
         "customer_id"
       ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "employee_id"
+          ],
+          "referred_schema": "public",
+          "referred_table": "employees",
+          "referred_columns": [
+            "employee_id"
+          ]
+        }
+      ]
+    },
+    {
+      "datasource": "warehouse",
+      "schema": "public",
+      "name": "employees",
+      "description": "",
+      "columns": [
+        {
+          "name": "branch_id",
+          "type": "INTEGER",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": false
+        },
+        {
+          "name": "employee_name",
+          "type": "TEXT",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        }
+      ],
+      "source_ref": "warehouse:public.employees",
+      "primary_key": [
+        "employee_id"
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "branch_id"
+          ],
+          "referred_schema": "public",
+          "referred_table": "branches",
+          "referred_columns": [
+            "branch_id"
+          ]
+        }
+      ]
+    },
+    {
+      "datasource": "warehouse",
+      "schema": "public",
+      "name": "history_accounts",
+      "description": "",
+      "columns": [
+        {
+          "name": "account_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "account_manager",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "account_name",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "business_size",
+          "type": "INTEGER",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "payment_cycle",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        }
+      ],
+      "source_ref": "warehouse:public.history_accounts",
+      "primary_key": [],
+      "foreign_keys": []
+    },
+    {
+      "datasource": "warehouse",
+      "schema": "public",
+      "name": "history_orders",
+      "description": "",
+      "columns": [
+        {
+          "name": "account_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "cancelled_at",
+          "type": "DATE",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "days_to_close",
+          "type": "INTEGER",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "discount_percentage",
+          "type": "NUMERIC(4, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "order_contact_email",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "order_contact_name",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "order_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "post_discount_revenue",
+          "type": "NUMERIC(9, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "pre_discount_revenue",
+          "type": "NUMERIC(9, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "product_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "purchased_at",
+          "type": "DATE",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "returned_at",
+          "type": "DATE",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        }
+      ],
+      "source_ref": "warehouse:public.history_orders",
+      "primary_key": [],
+      "foreign_keys": []
+    },
+    {
+      "datasource": "warehouse",
+      "schema": "public",
+      "name": "history_products",
+      "description": "",
+      "columns": [
+        {
+          "name": "paper_type",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "price",
+          "type": "NUMERIC(6, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "product_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "product_name",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        }
+      ],
+      "source_ref": "warehouse:public.history_products",
+      "primary_key": [],
+      "foreign_keys": []
+    },
+    {
+      "datasource": "warehouse",
+      "schema": "public",
+      "name": "history_reviews",
+      "description": "",
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "rating",
+          "type": "INTEGER",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "review",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "review_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "reviewed_at",
+          "type": "TIMESTAMP",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        }
+      ],
+      "source_ref": "warehouse:public.history_reviews",
+      "primary_key": [],
+      "foreign_keys": []
+    },
+    {
+      "datasource": "warehouse",
+      "schema": "public",
+      "name": "history_shippings",
+      "description": "",
+      "columns": [
+        {
+          "name": "days_to_ship",
+          "type": "DOUBLE PRECISION",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_address",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_city",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_cost",
+          "type": "NUMERIC(5, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_id",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_latitude",
+          "type": "NUMERIC(8, 6)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_longitude",
+          "type": "NUMERIC(9, 6)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_mode",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_region",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_state",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "shipping_zip",
+          "type": "VARCHAR",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        }
+      ],
+      "source_ref": "warehouse:public.history_shippings",
+      "primary_key": [],
       "foreign_keys": []
     },
     {
       "datasource": "warehouse",
       "schema": "public",
       "name": "orders",
-      "description": "One row per order. Recognized revenue includes only status = paid; refunded and cancelled orders are excluded.",
+      "description": "",
       "columns": [
         {
-          "name": "amount",
+          "name": "cost_usd",
           "type": "NUMERIC(12, 2)",
-          "description": "Order amount in USD; include only paid orders when calculating recognized revenue.",
+          "description": "",
           "label": "",
           "hidden": false,
-          "nullable": false
+          "nullable": true
         },
         {
           "name": "customer_id",
@@ -60,7 +523,31 @@
           "description": "",
           "label": "",
           "hidden": false,
-          "nullable": false
+          "nullable": true
+        },
+        {
+          "name": "discount_usd",
+          "type": "NUMERIC(12, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "gross_usd",
+          "type": "NUMERIC(12, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "net_usd",
+          "type": "NUMERIC(12, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
         },
         {
           "name": "order_id",
@@ -76,7 +563,23 @@
           "description": "",
           "label": "",
           "hidden": false,
-          "nullable": false
+          "nullable": true
+        },
+        {
+          "name": "product_id",
+          "type": "TEXT",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
         },
         {
           "name": "status",
@@ -84,7 +587,7 @@
           "description": "",
           "label": "",
           "hidden": false,
-          "nullable": false
+          "nullable": true
         }
       ],
       "source_ref": "warehouse:public.orders",
@@ -101,8 +604,63 @@
           "referred_columns": [
             "customer_id"
           ]
+        },
+        {
+          "columns": [
+            "product_id"
+          ],
+          "referred_schema": "public",
+          "referred_table": "products",
+          "referred_columns": [
+            "product_id"
+          ]
         }
       ]
+    },
+    {
+      "datasource": "warehouse",
+      "schema": "public",
+      "name": "products",
+      "description": "",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "TEXT",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": false
+        },
+        {
+          "name": "product_name",
+          "type": "TEXT",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "unit_cost",
+          "type": "NUMERIC(12, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        },
+        {
+          "name": "unit_price",
+          "type": "NUMERIC(12, 2)",
+          "description": "",
+          "label": "",
+          "hidden": false,
+          "nullable": true
+        }
+      ],
+      "source_ref": "warehouse:public.products",
+      "primary_key": [
+        "product_id"
+      ],
+      "foreign_keys": []
     }
   ],
   "semantic_models": [],

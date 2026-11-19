@@ -1,0 +1,21 @@
+foreign_keys:
+- columns:
+  - branch_id
+  referred_schema: public
+  referred_table: branches
+  referred_columns:
+  - branch_id
+name: employees
+primary_key:
+- employee_id
+source: warehouse:public.employees
+columns:
+- name: branch_id
+  nullable: true
+  type: INTEGER
+- name: employee_id
+  nullable: false
+  type: INTEGER
+- name: employee_name
+  nullable: true
+  type: TEXT

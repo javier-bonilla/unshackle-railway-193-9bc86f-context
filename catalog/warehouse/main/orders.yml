@@ -1,15 +1,5 @@
 name: orders
-description: One row per order. Recognized revenue counts paid orders only; refunded and cancelled orders
-  are excluded.
+description: 2025 scenario orders; only completed counts as recognized revenue. See knowledge/team-demo.md
+  for relationships.
 source: dbt:models/orders.sql
-columns:
-- name: amount
-  description: USD amount before filtering for paid status.
-- name: customer_id
-  description: Customer foreign key.
-- name: order_id
-  description: Unique order identifier.
-- name: ordered_at
-  description: Order date; calendar months are used for monthly reporting.
-- name: status
-  description: paid, refunded, or cancelled. Only paid contributes to recognized revenue.
+columns: []

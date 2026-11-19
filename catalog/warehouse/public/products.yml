@@ -1,0 +1,17 @@
+name: products
+primary_key:
+- product_id
+source: warehouse:public.products
+columns:
+- name: product_id
+  nullable: false
+  type: TEXT
+- name: product_name
+  nullable: true
+  type: TEXT
+- name: unit_cost
+  nullable: true
+  type: NUMERIC(12, 2)
+- name: unit_price
+  nullable: true
+  type: NUMERIC(12, 2)

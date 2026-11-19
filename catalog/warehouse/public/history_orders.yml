@@ -1,0 +1,48 @@
+name: history_orders
+source: warehouse:public.history_orders
+columns:
+- name: account_id
+  nullable: true
+  type: VARCHAR
+- name: cancelled_at
+  nullable: true
+  type: DATE
+- name: days_to_close
+  nullable: true
+  type: INTEGER
+- name: discount_percentage
+  nullable: true
+  type: NUMERIC(4, 2)
+- name: order_contact_email
+  nullable: true
+  type: VARCHAR
+- name: order_contact_name
+  nullable: true
+  type: VARCHAR
+- name: order_id
+  nullable: true
+  type: VARCHAR
+- name: post_discount_revenue
+  nullable: true
+  type: NUMERIC(9, 2)
+- name: pre_discount_revenue
+  nullable: true
+  type: NUMERIC(9, 2)
+- name: product_id
+  nullable: true
+  type: VARCHAR
+- name: purchased_at
+  nullable: true
+  type: DATE
+- name: quantity
+  nullable: true
+  type: INTEGER
+- name: returned_at
+  nullable: true
+  type: DATE
+- name: shipping_id
+  nullable: true
+  type: VARCHAR
+- name: status
+  nullable: true
+  type: VARCHAR

@@ -1,0 +1,15 @@
+name: history_products
+source: warehouse:public.history_products
+columns:
+- name: paper_type
+  nullable: true
+  type: VARCHAR
+- name: price
+  nullable: true
+  type: NUMERIC(6, 2)
+- name: product_id
+  nullable: true
+  type: VARCHAR
+- name: product_name
+  nullable: true
+  type: VARCHAR

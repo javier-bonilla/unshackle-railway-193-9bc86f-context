@@ -1,0 +1,18 @@
+name: history_reviews
+source: warehouse:public.history_reviews
+columns:
+- name: order_id
+  nullable: true
+  type: VARCHAR
+- name: rating
+  nullable: true
+  type: INTEGER
+- name: review
+  nullable: true
+  type: VARCHAR
+- name: review_id
+  nullable: true
+  type: VARCHAR
+- name: reviewed_at
+  nullable: true
+  type: TIMESTAMP

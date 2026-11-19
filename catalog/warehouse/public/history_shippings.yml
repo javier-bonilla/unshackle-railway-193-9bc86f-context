@@ -1,0 +1,36 @@
+name: history_shippings
+source: warehouse:public.history_shippings
+columns:
+- name: days_to_ship
+  nullable: true
+  type: DOUBLE PRECISION
+- name: shipping_address
+  nullable: true
+  type: VARCHAR
+- name: shipping_city
+  nullable: true
+  type: VARCHAR
+- name: shipping_cost
+  nullable: true
+  type: NUMERIC(5, 2)
+- name: shipping_id
+  nullable: true
+  type: VARCHAR
+- name: shipping_latitude
+  nullable: true
+  type: NUMERIC(8, 6)
+- name: shipping_longitude
+  nullable: true
+  type: NUMERIC(9, 6)
+- name: shipping_mode
+  nullable: true
+  type: VARCHAR
+- name: shipping_region
+  nullable: true
+  type: VARCHAR
+- name: shipping_state
+  nullable: true
+  type: VARCHAR
+- name: shipping_zip
+  nullable: true
+  type: VARCHAR

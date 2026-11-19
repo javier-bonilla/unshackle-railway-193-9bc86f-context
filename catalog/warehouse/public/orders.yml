@@ -1,5 +1,3 @@
-description: One row per order. Recognized revenue includes only status = paid; refunded and cancelled
-  orders are excluded.
 foreign_keys:
 - columns:
   - customer_id
@@ -7,24 +5,44 @@ foreign_keys:
   referred_table: customers
   referred_columns:
   - customer_id
+- columns:
+  - product_id
+  referred_schema: public
+  referred_table: products
+  referred_columns:
+  - product_id
 name: orders
 primary_key:
 - order_id
 source: warehouse:public.orders
 columns:
-- description: Order amount in USD; include only paid orders when calculating recognized revenue.
-  name: amount
-  nullable: false
+- name: cost_usd
+  nullable: true
   type: NUMERIC(12, 2)
 - name: customer_id
-  nullable: false
+  nullable: true
   type: INTEGER
+- name: discount_usd
+  nullable: true
+  type: NUMERIC(12, 2)
+- name: gross_usd
+  nullable: true
+  type: NUMERIC(12, 2)
+- name: net_usd
+  nullable: true
+  type: NUMERIC(12, 2)
 - name: order_id
   nullable: false
   type: INTEGER
 - name: ordered_at
-  nullable: false
+  nullable: true
   type: DATE
+- name: product_id
+  nullable: true
+  type: TEXT
+- name: quantity
+  nullable: true
+  type: INTEGER
 - name: status
-  nullable: false
+  nullable: true
   type: TEXT
