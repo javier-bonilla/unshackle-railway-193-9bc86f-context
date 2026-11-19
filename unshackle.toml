@@ -1,0 +1,23 @@
+# unshackle output config. Set source credentials in environment variables, not here.
+
+[workspace]
+name = "context"
+
+# Where each kind of file lives. Change these to fit an existing repo,
+# e.g. semantic = "models/semantic" inside a dbt project.
+[paths]
+semantic = "semantic"
+catalog = "catalog"
+knowledge = "knowledge"
+queries = "queries"
+notebooks = "notebooks"
+schedules = "schedules"
+policies = "policies"
+evals = "evals"
+sql_models = "queries/models"
+data = "data"
+
+# The warehouse type labels the SQL dialect of generated files. Left unset, build uses
+# what the BI export reports, else ANSI_SQL with a warning in migration/report.md.
+[datasources.warehouse]
+# type = "postgres"   # snowflake | bigquery | databricks | redshift | postgres | duckdb
